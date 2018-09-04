@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import styles from './app.css';
 import Display from '../Display/Display';
 import Buttons from '../Buttons/Buttons';
+import Header from '../Header/Header';
 import {
     buttonsRows,
     buttonTypes,
@@ -147,6 +148,7 @@ class App extends Component {
 
         return (
             <div className={styles.appContainer}>
+                <Header />
                 <Display value={displayValue} />
                 <Buttons rows={rows} />
             </div>
