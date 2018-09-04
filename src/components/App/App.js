@@ -26,10 +26,6 @@ class App extends Component {
         this.setState(emptyState);
     }
 
-    clearOperation() {
-        this.setState({ operation: '' });
-    }
-
     calculateResult(nextOperation = '') {
         const {
             value,
@@ -54,6 +50,8 @@ class App extends Component {
             case operations.EQUAL:
                 result = parseFloat(displayValue);
                 break;
+            case operations.PERCENT:
+                result = parseFloat(displayValue) / 100;
         }
 
         this.setState({
@@ -103,7 +101,16 @@ class App extends Component {
     }
 
     inputOperation(newOperation) {
-        const { operation } = this.state;
+        const { displayValue, operation } = this.state;
+        switch (newOperation) {
+            case operations.INVERSION:
+                const newValue = -1 * parseFloat(displayValue);
+                this.setState({ displayValue: newValue.toString()});
+                return;
+            case operations.CLEAR:
+                return this.clearAll();
+        }
+
         if (operation) {
             // calculate result only an operation button has been clicked
             // and a previous operation button has been submitted

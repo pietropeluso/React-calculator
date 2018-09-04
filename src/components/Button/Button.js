@@ -14,6 +14,7 @@ const Button = ({
         styles.button, {
             [styles.operand]: type === buttonTypes.OPERAND,
             [styles.operation]: type === buttonTypes.OPERATION,
+            [styles.extendedButton]: label === '0',
     });
 
     return (

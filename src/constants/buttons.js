@@ -11,16 +11,17 @@ const operations = {
     DIVISION: '/',
     PERCENT: '%',
     EQUAL: '=',
-    CLEAR: 'c',
+    INVERSION: '+/-',
+    CLEAR: 'AC',
 };
 
 const firstRow = [
     {
-        label: 'AC',
+        label: operations.CLEAR,
         type: buttonTypes.OPERATION,
     },
     {
-        label: '±',
+        label: operations.INVERSION,
         type: buttonTypes.OPERATION,
     },
     {
@@ -94,10 +95,6 @@ const fifthRow = [
     {
         label: '0',
         type: buttonTypes.OPERAND,
-    },
-    {
-        label: '',
-        type: buttonTypes.NONE,
     },
     {
         label: '.',
