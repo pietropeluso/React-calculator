@@ -11,8 +11,8 @@
     outline: none;
     border: none;
     user-select: none;
-    border-top: 1px solid gray;
-    border-right: 1px solid gray;
+    border-top: 1px solid #666666;
+    border-right: 1px solid #666666;
 
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
@@ -26,13 +26,13 @@
 }
 
 .operand {
-    color: #000;
-    background-color: #E0E0E7;
+    color: #fff;
+    background-color: #1795d4;
 }
 
 .operation {
-    color: #fff;
-    background-color: #FB9817;
+    color: #333;
+    background-color: #FED800;
 }
 
 .extended-button {
