@@ -1,0 +1,26 @@
+.button {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 0%;
+    font-size: 50px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    user-select: none;
+    border-top: 1px solid gray;
+    border-right: 1px solid gray;
+}
+
+.operand {
+    color: #000;
+    background-color: #E0E0E7;
+}
+
+.operation {
+    color: #fff;
+    background-color: #FB9817;
+}
