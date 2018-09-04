@@ -13,6 +13,16 @@
     user-select: none;
     border-top: 1px solid gray;
     border-right: 1px solid gray;
+
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.button:active {
+    background-color: #b2b2b2;
 }
 
 .operand {
@@ -23,4 +33,8 @@
 .operation {
     color: #fff;
     background-color: #FB9817;
+}
+
+.extended-button {
+    flex-grow: 2;
 }
