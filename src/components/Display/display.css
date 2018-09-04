@@ -9,3 +9,7 @@
     justify-content: flex-end;
     align-items: center;
 }
+
+.display > p {
+    padding: 10px 20px;
+}
