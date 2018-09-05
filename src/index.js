@@ -1,11 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/App/App';
+import Root from './Root';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+const renderApplication = Component => {
+    ReactDOM.hydrate(
+        <Component />,
+        document.getElementById('root')
+    );
+}
 
-module.hot.accept();
+renderApplication(Root);
+
+if (module.hot) {
+    module.hot.accept('./Root.js', () => {
+        const App = require('./Root').default;
+        renderApplication(App);
+    });
+}
