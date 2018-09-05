@@ -17,6 +17,8 @@ const emptyState = {
     awaitingOperand: true,
 };
 
+const isThereADot = value => (/\./).test(value);
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -71,6 +73,16 @@ class App extends Component {
             awaitingOperand
         } = this.state;
 
+        // there can be only one dot for an operand
+        if (newOperand === '.') {
+            if (!isThereADot(displayValue)) {
+                return this.setState({
+                    displayValue: displayValue.concat(newOperand),
+                    awaitingOperand: operation ? false : true,
+                });
+            }
+            return;
+        }
         if (!operation) {
             const newValue = displayValue === '0' ? newOperand : displayValue.concat(newOperand);
             return this.setState({
@@ -94,7 +106,6 @@ class App extends Component {
                 });
             } else {
                 this.setState({
-                    value: parseFloat(displayValue),
                     displayValue: displayValue.concat(newOperand),
                 });
             }
