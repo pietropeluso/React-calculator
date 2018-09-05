@@ -1,7 +1,9 @@
+@import "../../styles/colors.css";
+
 .header {
-    background: #1795d4;
+    background: var(--color-blue);
     padding: 15px 10px;
-    border-bottom: 1px solid #cdeeff;
+    border-bottom: 1px solid var(--color-light-gray);
 }
 
 .logo {

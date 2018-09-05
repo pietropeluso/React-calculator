@@ -1,0 +1,3 @@
+@import "./mixins.css";
+
+@mixin define-font Lato, normal, normal, ../assets/fonts/Lato-Regular;

@@ -1,3 +1,5 @@
+@import "../../styles/colors.css";
+
 .button {
     height: 80px;
     display: flex;
@@ -11,8 +13,8 @@
     outline: none;
     border: none;
     user-select: none;
-    border-top: 1px solid #cdeeff;
-    border-right: 1px solid #cdeeff;
+    border-top: 1px solid var(--color-light-gray);
+    border-right: 1px solid var(--color-light-gray);
 
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
@@ -22,19 +24,25 @@
 }
 
 .button:active {
-    background-color: #b2b2b2;
+    background-color: var(--color-mid-gray);
 }
 
 .operand {
-    color: #fff;
-    background-color: #1795d4;
+    color: var(--color-white);
+    background-color: var(--color-blue);
 }
 
 .operation {
-    color: #333;
-    background-color: #FED800;
+    color: var(--color-dark-gray);
+    background-color: var(--color-yellow);
 }
 
 .extended-button {
     flex-grow: 2;
+}
+
+@media (max-width: 600px) {
+    .button {
+        font-size: 25px;
+    }
 }

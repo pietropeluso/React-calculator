@@ -1,0 +1,13 @@
+@define-mixin define-font $name, $weight, $style, $base-path {
+
+    @font-face {
+        font-family: "$(name)";
+        font-weight: $weight;
+        font-style: $style;
+        src: url("$(base-path).eot");
+        src: url("$(base-path).eot?#iefix") format("embedded-opentype"),
+            url("$(base-path).woff2") format("woff2"),
+            url("$(base-path).woff") format("woff"),
+            url("$(base-path).ttf") format("truetype");
+    }
+}
