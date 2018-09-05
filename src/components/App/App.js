@@ -47,13 +47,12 @@ class App extends Component {
     }
 
     render() {
-        const { displayValue } = this.props.calculatorStore;
         const rows = this.addClickHandlerToData(buttonsRows);
 
         return (
             <div className={styles.appContainer}>
                 <Header />
-                <Display value={displayValue} />
+                <Display />
                 <Buttons rows={rows} />
             </div>
         );

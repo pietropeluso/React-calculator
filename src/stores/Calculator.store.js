@@ -2,10 +2,13 @@ import { types } from 'mobx-state-tree';
 
 import { operations } from '../constants/buttons';
 
+const DEFAULT_DEFAULT_VALUE = '0';
+const DEFAULT_OPERATION_VALUE = '';
+
 const calculatorModel = {
     value: types.optional(types.number, NaN),
-    displayValue: types.optional(types.string, '0'),
-    operation: types.optional(types.string, ''),
+    displayValue: types.optional(types.string, DEFAULT_DEFAULT_VALUE),
+    operation: types.optional(types.string, DEFAULT_OPERATION_VALUE),
     awaitingOperand: types.optional(types.boolean, true),
 };
 
@@ -17,7 +20,7 @@ const calculatorViews = self => ({
 
 const calculatorActions = self => ({
     clearAll() {
-        self.updateState('0', true, NaN, '');
+        self.updateState(DEFAULT_DEFAULT_VALUE, true, NaN, DEFAULT_OPERATION_VALUE);
     },
 
     updateState(
@@ -91,7 +94,7 @@ const calculatorActions = self => ({
         }
 
         if (!operation) {
-            const newDisplayValue = displayValue === '0' ? newOperand : displayValue.concat(newOperand);
+            const newDisplayValue = displayValue === DEFAULT_DEFAULT_VALUE ? newOperand : displayValue.concat(newOperand);
             return self.updateState(newDisplayValue, false);
         } else {
             if (!value) {
