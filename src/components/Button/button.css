@@ -11,8 +11,8 @@
     outline: none;
     border: none;
     user-select: none;
-    border-top: 1px solid #666666;
-    border-right: 1px solid #666666;
+    border-top: 1px solid #cdeeff;
+    border-right: 1px solid #cdeeff;
 
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
