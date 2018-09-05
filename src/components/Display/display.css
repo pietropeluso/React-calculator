@@ -1,4 +1,5 @@
 @import "../../styles/colors.css";
+@import "../../styles/media.css";
 
 .display {
     display: flex;
@@ -7,18 +8,16 @@
     background-color: var(--color-dark-gray);
     color: var(--color-white);
     text-align: right;
-    font-size: 50px;
+    font-size: 30px;
     justify-content: flex-end;
     align-items: center;
+
+    @media (--breakpoint-up-bp2) {
+        font-size: 50px;
+    }
 }
 
 .display > p {
     margin: 0;
     padding: 30px 10px 10px 10px;
-}
-
-@media (max-width: 600px) {
-    .display {
-        font-size: 30px;
-    }
 }

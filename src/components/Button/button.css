@@ -1,4 +1,5 @@
 @import "../../styles/colors.css";
+@import "../../styles/media.css";
 
 .button {
     height: 80px;
@@ -8,7 +9,7 @@
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: 0%;
-    font-size: 50px;
+    font-size: 25px;
     cursor: pointer;
     outline: none;
     border: none;
@@ -21,6 +22,10 @@
     -o-transition: all .3s ease;
     -ms-transition: all .3s ease;
     transition: all .3s ease;
+
+    @media (--breakpoint-up-bp2) {
+        font-size: 50px;
+    }
 }
 
 .button:active {
@@ -39,10 +44,4 @@
 
 .extended-button {
     flex-grow: 2;
-}
-
-@media (max-width: 600px) {
-    .button {
-        font-size: 25px;
-    }
 }

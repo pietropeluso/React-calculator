@@ -1,0 +1,5 @@
+@custom-media --breakpoint-up-bp1 (width >= 0px);
+@custom-media --breakpoint-up-bp2 (width >= 600px);
+@custom-media --breakpoint-up-bp3 (width >= 900px);
+@custom-media --breakpoint-up-bp4 (width >= 1200px);
+@custom-media --breakpoint-up-bp5 (width >= 1800px);
