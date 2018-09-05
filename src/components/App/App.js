@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { inject } from 'mobx-react';
 
 import styles from './app.css';
 import Display from '../Display/Display';
@@ -7,7 +9,6 @@ import Header from '../Header/Header';
 import {
     buttonsRows,
     buttonTypes,
-    operations,
 } from '../../constants/buttons';
 
 const emptyState = {
@@ -17,131 +18,23 @@ const emptyState = {
     awaitingOperand: true,
 };
 
-const isThereADot = value => (/\./).test(value);
-
+@inject('calculatorStore')
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = emptyState;
-    }
-
-    clearAll() {
-        this.setState(emptyState);
-    }
-
-    calculateResult(nextOperation = '') {
-        const {
-            value,
-            displayValue,
-            operation,
-        } = this.state;
-        let result;
-
-        switch (operation) {
-            case operations.ADDITION:
-                result = value + parseFloat(displayValue);
-                break;
-            case operations.SUBTRACTION:
-                result = value - parseFloat(displayValue);
-                break;
-            case operations.MULTIPLICATION:
-                result = value * parseFloat(displayValue);
-                break;
-            case operations.DIVISION:
-                result = value / parseFloat(displayValue);
-                break;
-            case operations.EQUAL:
-                result = parseFloat(displayValue);
-                break;
-            case operations.PERCENT:
-                result = parseFloat(displayValue) / 100;
-        }
-
-        this.setState({
-            value: null,
-            displayValue: result.toString(),
-            operation: nextOperation,
-            awaitingOperand: true,
-        });
-    }
-
-    inputOperand(newOperand) {
-        const {
-            displayValue,
-            operation,
-            value,
-            awaitingOperand
-        } = this.state;
-
-        // there can be only one dot for an operand
-        if (newOperand === '.') {
-            if (!isThereADot(displayValue)) {
-                return this.setState({
-                    displayValue: displayValue.concat(newOperand),
-                    awaitingOperand: operation ? false : true,
-                });
-            }
-            return;
-        }
-        if (!operation) {
-            const newValue = displayValue === '0' ? newOperand : displayValue.concat(newOperand);
-            return this.setState({
-                displayValue: newValue,
-                awaitingOperand: false,
-            });
-        } else {
-            if (!value) {
-                return this.setState({
-                    value: parseFloat(displayValue),
-                    displayValue: newOperand,
-                    awaitingOperand: false,
-                });
-            }
-
-            if (awaitingOperand) {
-                this.setState({
-                    value: parseFloat(displayValue),
-                    awaitingOperand: false,
-                    displayValue: newOperand,
-                });
-            } else {
-                this.setState({
-                    displayValue: displayValue.concat(newOperand),
-                });
-            }
-        }
-    }
-
-    inputOperation(newOperation) {
-        const { displayValue, operation } = this.state;
-        switch (newOperation) {
-            case operations.INVERSION:
-                const newValue = -1 * parseFloat(displayValue);
-                this.setState({ displayValue: newValue.toString()});
-                return;
-            case operations.CLEAR:
-                return this.clearAll();
-        }
-
-        if (operation) {
-            // calculate result only an operation button has been clicked
-            // and a previous operation button has been submitted
-            return this.calculateResult(newOperation);
-        }
-
-        this.setState({ operation: newOperation });
-    }
-
     handleButtonClick = item => {
         const {
             label,
             type,
         } = item;
 
+        const {
+            inputOperand,
+            inputOperation,
+        } = this.props.calculatorStore;
+
         return type === buttonTypes.OPERAND ?
-            this.inputOperand(label)
+            inputOperand(label)
             :
-            this.inputOperation(label);
+            inputOperation(label);
     }
 
     addClickHandlerToData = rows => {
@@ -154,7 +47,7 @@ class App extends Component {
     }
 
     render() {
-        const { displayValue } = this.state;
+        const { displayValue } = this.props.calculatorStore;
         const rows = this.addClickHandlerToData(buttonsRows);
 
         return (
@@ -166,5 +59,9 @@ class App extends Component {
         );
     }
 }
+
+App.wrappedComponent.propTypes = {
+    calculatorStore: PropTypes.object.isRequired,
+};
 
 export default App;
