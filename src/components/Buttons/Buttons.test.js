@@ -9,41 +9,43 @@ import Buttons from './Buttons';
 describe('Buttons component', () => {
     let firstRow;
     let secondRow;
-    let data;
     let getComponent;
+    let fakeStore;
 
     beforeEach(() => {
-        firstRow = [
-            {
-                label: '11',
-                type: '11',
-                onClickHandler: () => null,
-            },
-            {
-                label: '12',
-                type: '12',
-                onClickHandler: () => null,
-            },
-        ];
-        secondRow = [
-            {
-                label: '21',
-                type: '21',
-                onClickHandler: () => null,
-            },
-            {
-                label: '22',
-                type: '22',
-                onClickHandler: () => null,
-            },
-        ];
+        firstRow = {
+            buttons: [
+                {
+                    label: '11',
+                    type: '11',
+                },
+                {
+                    label: '12',
+                    type: '12',
+                },
+            ],
+        };
+        secondRow = {
+            buttons:[
+                {
+                    label: '21',
+                    type: '21',
+                },
+                {
+                    label: '22',
+                    type: '22',
+                },
+            ],
+        };
 
-        data = [
-            firstRow,
-            secondRow,
-        ];
+        fakeStore = {
+            rowsArray: [
+                firstRow,
+                secondRow,
+            ]
+        };
 
-        getComponent = (rows = data) => shallow(<Buttons rows={rows} />);
+        getComponent = (store = fakeStore) => shallow(<Buttons store={store} />);
     });
 
     it('renders a div element with a .display class', () => {
@@ -55,15 +57,16 @@ describe('Buttons component', () => {
     it('should render a number of children equals to the size of rows provided', () => {
         const component = getComponent();
 
-        expect(component.children().length).toEqual(data.length);
+        expect(component.children().length).toEqual(fakeStore.rowsArray.length);
     });
 
     it('should render as many Button components, inside each row, as many elements in each row', () => {
         const component = getComponent();
 
-        data.forEach((row, index) => {
+        fakeStore.rowsArray.forEach((row, index) => {
             const child = component.childAt(index);
-            expect(child.find('Button').length).toEqual(row.length);
+            expect(child.hasClass('row')).toBe(true);
+            expect(child.find('Button').length).toEqual(row.buttons.length);
             expect(child.hasClass('row')).toBe(true);
         });
     });

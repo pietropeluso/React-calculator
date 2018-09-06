@@ -4,7 +4,7 @@ import CalculatorStore, {
     calculatorActions,
     calculatorViews,
 } from './Calculator.store';
-import { operations } from '../constants/buttons';
+import { operations, buttonTypes } from '../constants/buttons';
 
 test('isThereADot() should return true if there is a dot in the provided string', () => {
     const fakeSelf = {};
@@ -340,3 +340,13 @@ test(
         expect(fakeSelf.operation).toEqual(operation);
     }
 );
+
+test('isOperand action should return true is the provided item `type` is `buttonTypes.OPERAND`', () => {
+    const fakeSelf = {};
+    const item = {
+        type: buttonTypes.OPERAND,
+    };
+    const actions = calculatorActions(fakeSelf);
+
+    expect(actions.isOperand(item)).toBe(true);
+});
