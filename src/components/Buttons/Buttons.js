@@ -5,42 +5,52 @@ import Button from '../Button/Button';
 import styles from './buttons.css';
 
 class Buttons extends Component {
-    renderRow = row => {
-        const buttons = row.map(item => {
-            return (
-                <Button
-                    label={item.label}
-                    onClick={item.onClickHandler}
-                    type={item.type}
-                    key={item.label}
-                />
-            );
-        });
+    renderButton = item => {
+        const onClickHandler = () => {
+            this.props.store.handleClick(item);
+        }
 
         return (
-            <div className={styles.row}>{ buttons }</div>
+            <Button
+                label={item.label}
+                onClick={onClickHandler}
+                type={item.type}
+                key={item.label}
+            />
+        );
+    }
+
+    renderRow = row => {
+        const buttons = row.buttons.map(this.renderButton);
+        return (
+            <div className={styles.row}>
+                { buttons }
+            </div>
         )
     }
 
+    renderRows() {
+        const { rowsArray } = this.props.store;
+        return rowsArray.map((row, index) => (
+            <Fragment key={index}>
+                { this.renderRow(row) }
+            </Fragment>
+        ))
+    }
+
     render() {
-        const rows = this.props.rows.map((row, index) => {
-            return (
-                <Fragment key={index}>
-                    { this.renderRow(row) }
-                </Fragment>
-            )
-        });
+        const content = this.renderRows();
 
         return (
             <div>
-                { rows }
+                { content }
             </div>
         )
     }
 };
 
 Buttons.propTypes = {
-    rows: PropTypes.array.isRequired,
+    store: PropTypes.object.isRequired,
 };
 
 export default Buttons;
