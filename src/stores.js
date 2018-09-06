@@ -1,6 +1,7 @@
 import Calculator from './stores/Calculator.store';
+import { buttonsRows } from './constants/buttons';
 
-const calculatorStore = Calculator.create();
+const calculatorStore = Calculator.create({ rows: buttonsRows });
 
 const getStores = () => ({
     calculatorStore,

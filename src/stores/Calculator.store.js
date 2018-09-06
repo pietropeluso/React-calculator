@@ -1,6 +1,7 @@
-import { types } from 'mobx-state-tree';
+import { types, getSnapshot } from 'mobx-state-tree';
 
-import { operations } from '../constants/buttons';
+import { operations, buttonTypes } from '../constants/buttons';
+import Row from './Row.store';
 
 const DEFAULT_DEFAULT_VALUE = '0';
 const DEFAULT_OPERATION_VALUE = '';
@@ -10,9 +11,14 @@ const calculatorModel = {
     displayValue: types.optional(types.string, DEFAULT_DEFAULT_VALUE),
     operation: types.optional(types.string, DEFAULT_OPERATION_VALUE),
     awaitingOperand: types.optional(types.boolean, true),
+    rows: types.optional(types.array(Row), []),
 };
 
 const calculatorViews = self => ({
+    get rowsArray() {
+        return getSnapshot(self.rows);
+    },
+
     isThereADot(stringToCheck) {
         return (/\./).test(stringToCheck);
     },
@@ -134,6 +140,18 @@ const calculatorActions = self => ({
         }
 
         self.operation = newOperation;
+    },
+
+    isOperand(item) {
+        return item.type === buttonTypes.OPERAND;
+    },
+
+    handleClick(item) {
+        if (self.isOperand(item)) {
+            return self.inputOperand(item.label);
+        }
+
+        return self.inputOperation(item.label);
     },
 });
 
